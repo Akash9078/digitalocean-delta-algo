@@ -84,6 +84,11 @@ EOF
 systemctl daemon-reload
 systemctl enable delta-algo.service
 
+# ── 8. Setup daily log cleanup cron job ──────────────────────────────────────
+echo "[8/8] Setting up daily log cleanup..."
+# Delete log files older than 1 day at 3am daily
+echo "0 3 * * * find $APP_DIR/logs -type f -mtime +0 -delete 2>/dev/null" >> /etc/crontab
+
 # ── Done ──────────────────────────────────────────────────────────────────────
 echo ""
 echo "╔══════════════════════════════════════════════════════╗"
