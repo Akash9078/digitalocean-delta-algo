@@ -90,7 +90,7 @@ risk:
   # Take Profit Configuration
   take_profit:
     # Take profit percentage from entry price
-    percentage: 4.0
+    percentage: 3.25
 
     # Take profit type: "market_order" or "limit_order"
     order_type: "limit_order"
