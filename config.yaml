@@ -14,7 +14,7 @@ trading:
   symbol: "BTCUSD"
 
   # Candle timeframe: "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "6h", "1d"
-  timeframe: "5m"
+  timeframe: "4h"
 
   # Order type: "market_order" or "limit_order"
   order_type: "market_order"
@@ -54,11 +54,11 @@ strategy:
     # Number of candles to wait for confirmation (default: 1)
     candles: 1
 
-    # Minimum time between signals in seconds (cooldown)
-    signal_cooldown: 300 # 5 minutes
+    # Minimum time between signals in seconds (cooldown) - for 4h use 4 hours
+    signal_cooldown: 14400 # 4 hours
 
-  # Lookback period for historical data (in hours)
-  lookback_hours: 24
+  # Lookback period for historical data (in hours) - 4h needs ~200 candles = 800 hours
+  lookback_hours: 800
 
 # Risk Management - Fully Configurable
 risk:
@@ -123,7 +123,7 @@ bot:
   mode: "live"
 
   # Loop interval in seconds (how often to check for signals)
-  loop_interval: 5 # 1 minute
+  loop_interval: 60 # 1 minute
 
   # Enable/disable the bot
   enabled: true
