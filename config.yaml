@@ -1,0 +1,224 @@
+# Delta Exchange Trading Bot Configuration
+# All parameters are fully configurable
+
+# Exchange Settings
+exchange:
+  name: "delta_exchange_india"
+  base_url: "https://api.india.delta.exchange"
+  # API credentials loaded from .env file
+  # DELTA_API_KEY and DELTA_API_SECRET
+
+# Trading Settings
+trading:
+  # Trading symbol (e.g., BTCUSD, ETHUSD)
+  symbol: "BTCUSD"
+
+  # Candle timeframe: "1m", "3m", "5m", "15m", "30m", "1h", "2h", "4h", "6h", "1d"
+  timeframe: "5m"
+
+  # Order type: "market_order" or "limit_order"
+  order_type: "market_order"
+
+  # Time in force: "gtc" (Good Till Cancel), "ioc" (Immediate or Cancel)
+  time_in_force: "gtc"
+
+# Strategy Configuration - Fully Configurable
+strategy:
+  # SMA Strategy Parameters
+  sma:
+    # Short-term SMA period (default: 9)
+    short_period: 9
+
+    # Long-term SMA period (default: 21, can be changed to 30 or any value)
+    long_period: 21
+
+    # Enable/disable SMA strategy
+    enabled: true
+
+  # RSI Strategy Parameters
+  rsi:
+    # RSI calculation period (default: 14)
+    period: 14
+
+    # RSI overbought threshold (default: 70)
+    overbought: 70
+
+    # RSI oversold threshold (default: 30)
+    oversold: 30
+
+    # Enable/disable RSI confirmation
+    enabled: true
+
+  # Signal Confirmation
+  confirmation:
+    # Number of candles to wait for confirmation (default: 1)
+    candles: 1
+
+    # Minimum time between signals in seconds (cooldown)
+    signal_cooldown: 300 # 5 minutes
+
+  # Lookback period for historical data (in hours)
+  lookback_hours: 24
+
+# Risk Management - Fully Configurable
+risk:
+  # Position Sizing
+  position_sizing:
+    # Position size type: "fixed" or "percentage"
+    type: "fixed"
+
+    # Fixed position size (number of contracts)
+    fixed_size: 1
+
+    # Percentage of account balance to risk per trade (if type is "percentage")
+    risk_percentage: 2.0
+
+  # Stop Loss Configuration
+  stop_loss:
+    # Stop loss percentage from entry price
+    percentage: 2.0
+
+    # Stop loss type: "market_order" or "limit_order"
+    order_type: "limit_order"
+
+    # Use trailing stop loss
+    trailing: false
+
+    # Trailing amount (if trailing is true)
+    trail_amount: "50"
+
+  # Take Profit Configuration
+  take_profit:
+    # Take profit percentage from entry price
+    percentage: 4.0
+
+    # Take profit type: "market_order" or "limit_order"
+    order_type: "limit_order"
+
+  # Bracket Order Settings
+  bracket_order:
+    # Enable/disable bracket orders (TP and SL)
+    enabled: true
+
+    # Trigger method: "mark_price", "last_traded_price", "spot_price"
+    trigger_method: "last_traded_price"
+
+  # Risk Limits
+  limits:
+    # Maximum open positions allowed
+    max_positions: 1
+
+    # Maximum daily loss percentage
+    max_daily_loss: 5.0
+
+    # Maximum position size (in contracts)
+    max_position_size: 10
+
+    # Enable auto top-up for positions
+    auto_topup: false
+
+# Bot Configuration
+bot:
+  # Bot mode: "live" or "paper" (paper trading not yet implemented)
+  mode: "live"
+
+  # Loop interval in seconds (how often to check for signals)
+  loop_interval: 5 # 1 minute
+
+  # Enable/disable the bot
+  enabled: true
+
+  # Automatically start on launch
+  auto_start: false
+
+# Logging Configuration
+logging:
+  # Log level: "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"
+  level: "INFO"
+
+  # Log to file
+  file:
+    enabled: true
+    path: "logs/trading_bot.log"
+    max_bytes: 10485760 # 10 MB
+    backup_count: 5
+
+  # Log to console
+  console:
+    enabled: true
+
+  # Log trade executions separately
+  trades_log:
+    enabled: true
+    path: "logs/trades.log"
+
+# FastAPI Configuration
+api:
+  # API host
+  host: "0.0.0.0"
+
+  # API port
+  port: 8501
+
+  # Enable API
+  enabled: true
+
+  # API authentication (optional)
+  auth:
+    enabled: false
+    username: "admin"
+    password: "changeme"
+
+# Notification Settings (Optional)
+notifications:
+  # Enable notifications
+  enabled: false
+
+  # Notification channels
+  channels:
+    # Telegram bot notifications
+    telegram:
+      enabled: false
+      bot_token: ""
+      chat_id: ""
+
+    # Email notifications
+    email:
+      enabled: false
+      smtp_server: ""
+      smtp_port: 587
+      sender: ""
+      receiver: ""
+      password: ""
+
+  # Events to notify
+  events:
+    - "order_filled"
+    - "position_opened"
+    - "position_closed"
+    - "stop_loss_hit"
+    - "take_profit_hit"
+    - "error"
+
+# Database Configuration (for trade history persistence)
+database:
+  # Database type: "sqlite" or "none"
+  type: "sqlite"
+
+  # SQLite database path
+  sqlite_path: "data/trading_bot.db"
+
+# Advanced Settings
+advanced:
+  # Enable WebSocket for real-time data (future enhancement)
+  use_websocket: false
+
+  # Retry settings for API calls
+  retry:
+    max_attempts: 3
+    backoff_factor: 2
+    max_delay: 30
+
+  # Rate limiting
+  rate_limit:
+    requests_per_minute: 60
