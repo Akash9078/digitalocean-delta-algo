@@ -76,7 +76,7 @@ risk:
   # Stop Loss Configuration
   stop_loss:
     # Stop loss percentage from entry price
-    percentage: 2.0
+    percentage: 1.5
 
     # Stop loss type: "market_order" or "limit_order"
     order_type: "limit_order"
