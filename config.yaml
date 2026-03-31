@@ -68,7 +68,7 @@ risk:
     type: "fixed"
 
     # Fixed position size (number of contracts)
-    fixed_size: 1
+    fixed_size: 3
 
     # Percentage of account balance to risk per trade (if type is "percentage")
     risk_percentage: 2.0
