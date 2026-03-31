@@ -1,7 +1,6 @@
 version: "3.9"
 
 services:
-  # ── Trading Bot + FastAPI backend (Headless) ──────────────────────────────
   bot:
     build:
       context: .
@@ -14,11 +13,10 @@ services:
       - PYTHONUNBUFFERED=1
       - PYTHONDONTWRITEBYTECODE=1
     volumes:
-      - ./logs:/app/logs          # Persist trading logs
-      - ./data:/app/data          # Persist SQLite DB
-      # Config is now built into the image - no volume mount needed
+      - ./logs:/app/logs
+      - ./data:/app/data
     ports:
-      - "8501:8501"                 # FastAPI port
+      - "8501:8501"
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8501/health')"]
       interval: 30s
